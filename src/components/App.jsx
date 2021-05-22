@@ -1,38 +1,23 @@
 import React from 'react';
 import AddForm from './AddForm';
 import ColorsList from './ColorsList';
-import { v4 as uuidv4 } from 'uuid';
+import store from '../data/store';
+import actions from '../data/actions';
 
 class App extends React.Component {
     constructor() {
         super();
-        this.state = {
-            colors: [],
-        };
+        this.state = store.getState();
 
-        this.onAddNewColor = this.onAddNewColor.bind(this);
-        this.onDeleteColor = this.onDeleteColor.bind(this);
-        this.onSetRating = this.onSetRating.bind(this);
+        this.onAddNewColor = actions.add;
+        this.onDeleteColor = actions.remove;
+        this.onSetRating = actions.rate;
     }
 
-    onAddNewColor(color, name) {
-        const colors = [
-            ...this.state.colors,
-            { id: uuidv4(), color, name, rating: 0 },
-        ];
-        this.setState({ colors });
-    }
-
-    onDeleteColor(id) {
-        const colors = this.state.colors.filter((x) => x.id !== id);
-        this.setState({ colors });
-    }
-
-    onSetRating(id, rating) {
-        const colors = this.state.colors.map((x) => {
-            return x.id === id ? { ...x, rating } : { ...x };
+    componentWillMount() {
+        store.on('change', () => {
+            this.setState(store.getState());
         });
-        this.setState({ colors });
     }
 
     render() {
