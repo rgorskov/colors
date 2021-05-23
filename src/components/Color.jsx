@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { rate, remove } from '../data/thunkCreators';
+import { rate, remove } from '@data/thunkCreators';
 import ColorInfo from './ColorInfo';
 import Rating from './Rating';
 

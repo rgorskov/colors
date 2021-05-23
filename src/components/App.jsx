@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { initialize } from '../data/thunkCreators';
+import { initialize } from '@data/thunkCreators';
 import AddForm from './AddForm';
 import ColorsList from './ColorsList';
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { add } from '../data/thunkCreators';
+import { add } from '@data/thunkCreators';
 
 const AddForm = ({ onAddNewColor }) => {
     const [name, setName] = useState('');

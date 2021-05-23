@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sort } from '../data/actionCreators';
+import { sort } from '@data/actionCreators';
 
 const Sort = ({ sortBy, onSort }) => {
     return (

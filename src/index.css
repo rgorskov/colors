@@ -168,20 +168,6 @@ body * {
     text-align: center;
 }
 
-.star {
-    border: none;
-    background-color: transparent;
-    font-size: 30px;
-    cursor: pointer;
-    outline: none;
-    transition: 0.25s all ease;
-    color: #9e9e9e;
-}
-
-.star.selected {
-    color: #ff9800;
-}
-
 .buttons {
     display: flex;
     flex-direction: column;
