@@ -1,33 +1,49 @@
 import React, { useRef } from 'react';
 
-const AddForm = ({ onAddNewColor }) => {
-    const nameRef = useRef(null),
-        colorRef = useRef(null);
-
-    const onButtonClick = () => {
-        const name = nameRef.current.value,
-            color = colorRef.current.value;
-        nameRef.current.value = '';
-        onAddNewColor(color, name);
-    };
-
+const AddForm = ({
+    inputedTitle,
+    inputedColor,
+    onAddNewColor,
+    onAsyncAdd,
+    onInputTitle,
+    onInputColor,
+}) => {
     return (
-        <form className="add-form">
+        <form className="add-form" onSubmit={(e) => e.preventDefault()}>
             <div className="inputBlock">
                 <label htmlFor="name">Название</label>
-                <input type="text" id="name" ref={nameRef} />
+                <input
+                    type="text"
+                    id="name"
+                    value={inputedTitle}
+                    onChange={(e) => onInputTitle(e.target.value)}
+                />
             </div>
             <div className="inputBlock">
                 <label htmlFor="color">Цвет</label>
-                <input type="color" id="color" ref={colorRef} />
+                <input
+                    type="color"
+                    id="color"
+                    value={inputedColor}
+                    onChange={(e) => onInputColor(e.target.value)}
+                />
             </div>
-            <button
-                type="button"
-                className="btn btnGreen"
-                onClick={onButtonClick}
-            >
-                Добавить
-            </button>
+            <div className="buttons">
+                <button
+                    type="button"
+                    className="btn btnGreen"
+                    onClick={onAddNewColor}
+                >
+                    Добавить
+                </button>
+                <button
+                    type="button"
+                    className="btn btnGreen"
+                    onClick={onAsyncAdd}
+                >
+                    Добавить с задержкой
+                </button>
+            </div>
         </form>
     );
 };

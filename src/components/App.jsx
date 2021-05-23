@@ -1,37 +1,35 @@
 import React from 'react';
 import AddForm from './AddForm';
 import ColorsList from './ColorsList';
-import store from '../data/store';
-import actions from '../data/actions';
 
-class App extends React.Component {
-    constructor() {
-        super();
-        this.state = store.getState();
-
-        this.onAddNewColor = actions.add;
-        this.onDeleteColor = actions.remove;
-        this.onSetRating = actions.rate;
-    }
-
-    componentWillMount() {
-        store.on('change', () => {
-            this.setState(store.getState());
-        });
-    }
-
-    render() {
-        return (
-            <div className="container">
-                <AddForm onAddNewColor={this.onAddNewColor} />
-                <ColorsList
-                    {...this.state}
-                    onDeleteColor={this.onDeleteColor}
-                    onSetRating={this.onSetRating}
-                />
-            </div>
-        );
-    }
-}
+const App = ({
+    state,
+    onAdd,
+    onAsyncAdd,
+    onRemove,
+    onRate,
+    onSort,
+    onInputTitle,
+    onInputColor,
+}) => {
+    return (
+        <div className="container">
+            <AddForm
+                inputedTitle={state.colors.inputedTitle}
+                inputedColor={state.colors.inputedColor}
+                onAddNewColor={onAdd}
+                onAsyncAdd={onAsyncAdd}
+                onInputTitle={onInputTitle}
+                onInputColor={onInputColor}
+            />
+            <ColorsList
+                {...state}
+                onDeleteColor={onRemove}
+                onSetRating={onRate}
+                onSort={onSort}
+            />
+        </div>
+    );
+};
 
 export default App;
