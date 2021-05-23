@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { add, asyncAdd, inputColor, inputTitle } from '../data/actionCreators';
+import { add } from '../data/thunkCreators';
 
-const AddForm = ({
-    inputedTitle,
-    inputedColor,
-    onAddNewColor,
-    onAsyncAdd,
-    onInputTitle,
-    onInputColor,
-}) => {
+const AddForm = ({ onAddNewColor }) => {
+    const [name, setName] = useState('');
+    const [color, setColor] = useState('#000000');
+
+    const onInputName = (e) => {
+        setName(e.target.value);
+    };
+    const onInputColor = (e) => {
+        setColor(e.target.value);
+    };
+
+    const onAddClick = () => {
+        onAddNewColor({ name, color });
+
+        setName('');
+    };
+
     return (
         <form className="add-form" onSubmit={(e) => e.preventDefault()}>
             <div className="inputBlock">
@@ -17,8 +26,8 @@ const AddForm = ({
                 <input
                     type="text"
                     id="name"
-                    value={inputedTitle}
-                    onChange={(e) => onInputTitle(e.target.value)}
+                    value={name}
+                    onChange={onInputName}
                 />
             </div>
             <div className="inputBlock">
@@ -26,42 +35,25 @@ const AddForm = ({
                 <input
                     type="color"
                     id="color"
-                    value={inputedColor}
-                    onChange={(e) => onInputColor(e.target.value)}
+                    value={color}
+                    onChange={onInputColor}
                 />
             </div>
             <div className="buttons">
                 <button
                     type="button"
                     className="btn btnGreen"
-                    onClick={onAddNewColor}
+                    onClick={onAddClick}
                 >
                     Добавить
-                </button>
-                <button
-                    type="button"
-                    className="btn btnGreen"
-                    onClick={onAsyncAdd}
-                >
-                    Добавить с задержкой
                 </button>
             </div>
         </form>
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        inputedTitle: state.inputedTitle,
-        inputedColor: state.inputedColor,
-    };
-};
-
 const mapDispatchToProps = {
     onAddNewColor: add,
-    onAsyncAdd: asyncAdd,
-    onInputTitle: inputTitle,
-    onInputColor: inputColor,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddForm);
+export default connect(null, mapDispatchToProps)(AddForm);

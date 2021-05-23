@@ -3,8 +3,7 @@ const actions = {
     REMOVE: 'REMOVE',
     RATE: 'RATE',
     SORT: 'SORT',
-    INPUT_TITLE: 'INPUT_TITLE',
-    INPUT_COLOR: 'INPUT_COLOR',
+    INITIALIZE: 'INITIALIZE',
 };
 
 export default actions;

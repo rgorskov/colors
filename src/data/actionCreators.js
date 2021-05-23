@@ -1,23 +1,30 @@
 import actionTypes from './actionTypes';
 
-export const add = () => {
+export const initializeSuccess = (colors) => {
+    return {
+        type: actionTypes.INITIALIZE,
+        payload: colors,
+    };
+};
+
+export const addSuccess = (newColor) => {
     return {
         type: actionTypes.ADD,
+        payload: newColor,
     };
 };
 
-export const remove = (id) => {
+export const removeSuccess = (id) => {
     return {
         type: actionTypes.REMOVE,
-        id,
+        payload: id,
     };
 };
 
-export const rate = (id, rating) => {
+export const rateSuccess = ({ id, rating }) => {
     return {
         type: actionTypes.RATE,
-        id,
-        rating,
+        payload: { id, rating },
     };
 };
 
@@ -25,27 +32,5 @@ export const sort = (sortBy) => {
     return {
         type: actionTypes.SORT,
         sortBy,
-    };
-};
-
-export const asyncAdd = (color, name) => {
-    return function (dispatch) {
-        setTimeout(() => {
-            dispatch(add(color, name));
-        }, 2000);
-    };
-};
-
-export const inputTitle = (inputedTitle) => {
-    return {
-        type: actionTypes.INPUT_TITLE,
-        inputedTitle,
-    };
-};
-
-export const inputColor = (inputedColor) => {
-    return {
-        type: actionTypes.INPUT_COLOR,
-        inputedColor,
     };
 };

@@ -1,39 +1,43 @@
 import actionTypes from './actionTypes';
-import { v4 as uuidv4 } from 'uuid';
 
-const mainReducer = (state = {}, action) => {
+const initialState = {
+    colors: [],
+    initialized: false,
+    sortBy: 'date',
+};
+
+const mainReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.ADD: {
-            const newColor = {
-                name: state.inputedTitle,
-                color: state.inputedColor || '#000000',
-                id: uuidv4(),
-                date: Date.now(),
-                rating: 0,
-            };
+        case actionTypes.INITIALIZE: {
+            const colors = Object.entries(action.payload).map(([id, color]) => {
+                return { id, ...color };
+            });
             return {
                 ...state,
-                inputedTitle: '',
-                inputedColor: '',
-                colors: [...state.colors, newColor],
+                initialized: true,
+                colors,
+            };
+        }
+        case actionTypes.ADD: {
+            return {
+                ...state,
+                colors: [...state.colors, action.payload],
             };
         }
         case actionTypes.RATE:
             return {
                 ...state,
                 colors: state.colors.map((c) =>
-                    c.id === action.id ? { ...c, rating: action.rating } : c
+                    c.id === action.payload.id
+                        ? { ...c, rating: action.payload.rating }
+                        : c
                 ),
             };
         case actionTypes.REMOVE:
             return {
                 ...state,
-                colors: state.colors.filter((c) => c.id !== action.id),
+                colors: state.colors.filter((c) => c.id !== action.payload),
             };
-        case actionTypes.INPUT_TITLE:
-            return { ...state, inputedTitle: action.inputedTitle };
-        case actionTypes.INPUT_COLOR:
-            return { ...state, inputedColor: action.inputedColor };
         case actionTypes.SORT:
             return { ...state, sortBy: action.sortBy };
         default:
