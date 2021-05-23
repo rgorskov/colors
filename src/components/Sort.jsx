@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { sort } from '../data/actionCreators';
 
 const Sort = ({ sortBy, onSort }) => {
     return (
@@ -7,7 +9,7 @@ const Sort = ({ sortBy, onSort }) => {
             <label>
                 <input
                     type="radio"
-                    checked={sortBy == 'date' ? 'checked' : ''}
+                    checked={sortBy === 'date' ? 'checked' : ''}
                     onChange={() => onSort('date')}
                 />
                 <span>дате</span>
@@ -15,7 +17,7 @@ const Sort = ({ sortBy, onSort }) => {
             <label>
                 <input
                     type="radio"
-                    checked={sortBy == 'name' ? 'checked' : ''}
+                    checked={sortBy === 'name' ? 'checked' : ''}
                     onChange={() => onSort('name')}
                 />
                 <span>названию</span>
@@ -23,7 +25,7 @@ const Sort = ({ sortBy, onSort }) => {
             <label>
                 <input
                     type="radio"
-                    checked={sortBy == 'rating' ? 'checked' : ''}
+                    checked={sortBy === 'rating' ? 'checked' : ''}
                     onChange={() => onSort('rating')}
                 />
                 <span>рейтингу</span>
@@ -32,4 +34,14 @@ const Sort = ({ sortBy, onSort }) => {
     );
 };
 
-export default Sort;
+const mapStateToProps = (state) => {
+    return {
+        sortBy: state.sortBy,
+    };
+};
+
+const mapDispatchToProps = {
+    onSort: sort,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);

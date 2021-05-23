@@ -1,13 +1,11 @@
 import thunk from 'redux-thunk';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import reducer from './reducers';
 
 const initialState = {
-    colors: {
-        list: [],
-        inputedColor: '',
-        inputedTitle: '',
-    },
+    colors: [],
+    inputedColor: '',
+    inputedTitle: '',
     sortBy: 'date',
 };
 

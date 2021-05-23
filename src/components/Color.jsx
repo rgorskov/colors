@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { rate, remove } from '../data/actionCreators';
 import ColorInfo from './ColorInfo';
 import Rating from './Rating';
 
@@ -12,4 +14,9 @@ const Color = ({ id, name, color, rating, onSetRating, onDeleteColor }) => {
     );
 };
 
-export default Color;
+const mapDispatchToProps = {
+    onDeleteColor: remove,
+    onSetRating: rate,
+};
+
+export default connect(null, mapDispatchToProps)(Color);

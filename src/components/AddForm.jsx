@@ -1,4 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { add, asyncAdd, inputColor, inputTitle } from '../data/actionCreators';
 
 const AddForm = ({
     inputedTitle,
@@ -48,4 +50,18 @@ const AddForm = ({
     );
 };
 
-export default AddForm;
+const mapStateToProps = (state) => {
+    return {
+        inputedTitle: state.inputedTitle,
+        inputedColor: state.inputedColor,
+    };
+};
+
+const mapDispatchToProps = {
+    onAddNewColor: add,
+    onAsyncAdd: asyncAdd,
+    onInputTitle: inputTitle,
+    onInputColor: inputColor,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddForm);
