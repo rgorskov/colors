@@ -16,8 +16,7 @@ export const initialize = () => {
 export const add = ({ name, color }) => {
     return async (dispatch) => {
         const newColor = { name, color, rating: 0, date: Date.now() };
-        const dbEntry = await colorsApi.add(newColor);
-        const id = dbEntry.name;
+        const id = await colorsApi.add(newColor);
         dispatch(addSuccess({ id, ...newColor }));
     };
 };

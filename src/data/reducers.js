@@ -9,9 +9,7 @@ const initialState = {
 const mainReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.INITIALIZE: {
-            const colors = Object.entries(action.payload).map(([id, color]) => {
-                return { id, ...color };
-            });
+            const colors = action.payload;
             return {
                 ...state,
                 initialized: true,
